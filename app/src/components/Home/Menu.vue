@@ -13,7 +13,7 @@
         <div class="flex justify-between items-center mb-2 md:mb-4">
           <h2 class="text-lg md:text-xl">{{ category.name }}</h2>
           <router-link
-            :to="'/' + category.name.toLowerCase()"
+            :to="'#' + category.name.toLowerCase()"
             class="text-sm text-gray-500 hover:underline"
           >
             View all
@@ -29,25 +29,19 @@
           >
             <div
               class="w-12 h-12 md:w-16 md:h-16 bg-gray-300 rounded-full mx-auto mb-4"
+              :style="{
+                backgroundImage: `url(${item.image})`,
+                backgroundSize: 'cover',
+              }"
             ></div>
             <p class="text-sm md:text-base font-bold">{{ item.name }}</p>
             <p class="text-sm text-gray-500">{{ item.price }}</p>
-            <!-- Quantity Controls -->
-            <div class="flex justify-center items-center mt-2">
-              <button
-                @click="decreaseQuantity(category.name, index)"
-                class="text-lg font-bold"
-              >
-                -
-              </button>
-              <span class="mx-2">{{ item.quantity }}</span>
-              <button
-                @click="increaseQuantity(category.name, index)"
-                class="text-lg font-bold"
-              >
-                +
-              </button>
-            </div>
+            <button
+              @click="addToTray(item)"
+              class="mt-2 bg-blue-500 text-white px-2 py-1 rounded"
+            >
+              Add to Tray
+            </button>
           </div>
         </div>
       </div>
@@ -64,59 +58,142 @@ export default {
         {
           name: "Drinks",
           items: [
-            { name: "Black Coffee", price: "Ksh 40", quantity: 0 },
-            { name: "Espresso", price: "Ksh 60", quantity: 0 },
-            { name: "Latte", price: "Ksh 80", quantity: 0 },
-            { name: "Cappuccino", price: "Ksh 100", quantity: 0 },
+            {
+              name: "Black Coffee",
+              price: "Ksh 40",
+              quantity: 1,
+              image: "path/to/coffee.jpg",
+            },
+            {
+              name: "Espresso",
+              price: "Ksh 60",
+              quantity: 1,
+              image: "path/to/espresso.jpg",
+            },
+            {
+              name: "Latte",
+              price: "Ksh 80",
+              quantity: 1,
+              image: "path/to/latte.jpg",
+            },
+            {
+              name: "Cappuccino",
+              price: "Ksh 100",
+              quantity: 1,
+              image: "path/to/cappuccino.jpg",
+            },
           ],
         },
         {
           name: "Snacks",
           items: [
-            { name: "Samosa", price: "Ksh 30", quantity: 0 },
-            { name: "Sandwich", price: "Ksh 50", quantity: 0 },
-            { name: "Pancake", price: "Ksh 20", quantity: 0 },
-            { name: "Croissant", price: "Ksh 40", quantity: 0 },
+            {
+              name: "Samosa",
+              price: "Ksh 30",
+              quantity: 1,
+              image: "path/to/samosa.jpg",
+            },
+            {
+              name: "Sandwich",
+              price: "Ksh 50",
+              quantity: 1,
+              image: "path/to/sandwich.jpg",
+            },
+            {
+              name: "Pancake",
+              price: "Ksh 20",
+              quantity: 1,
+              image: "path/to/pancake.jpg",
+            },
+            {
+              name: "Croissant",
+              price: "Ksh 40",
+              quantity: 1,
+              image: "path/to/croissant.jpg",
+            },
           ],
         },
         {
           name: "Lunch",
           items: [
-            { name: "Chicken & Chips", price: "Ksh 150", quantity: 0 },
-            { name: "Pilau", price: "Ksh 120", quantity: 0 },
-            { name: "Beef Stew", price: "Ksh 100", quantity: 0 },
-            { name: "Ugali & Fish", price: "Ksh 200", quantity: 0 },
+            {
+              name: "Chicken & Chips",
+              price: "Ksh 150",
+              quantity: 1,
+              image: "path/to/chicken-chips.jpg",
+            },
+            {
+              name: "Pilau",
+              price: "Ksh 120",
+              quantity: 1,
+              image: "path/to/pilau.jpg",
+            },
+            {
+              name: "Beef Stew",
+              price: "Ksh 100",
+              quantity: 1,
+              image: "path/to/beef-stew.jpg",
+            },
+            {
+              name: "Ugali & Fish",
+              price: "Ksh 200",
+              quantity: 1,
+              image: "path/to/ugali-fish.jpg",
+            },
           ],
         },
         {
           name: "Fruits",
           items: [
-            { name: "Banana", price: "Ksh 10", quantity: 0 },
-            { name: "Apple", price: "Ksh 20", quantity: 0 },
-            { name: "Mango", price: "Ksh 30", quantity: 0 },
-            { name: "Orange", price: "Ksh 15", quantity: 0 },
+            {
+              name: "Banana",
+              price: "Ksh 10",
+              quantity: 1,
+              image: "path/to/banana.jpg",
+            },
+            {
+              name: "Apple",
+              price: "Ksh 20",
+              quantity: 1,
+              image: "path/to/apple.jpg",
+            },
+            {
+              name: "Mango",
+              price: "Ksh 30",
+              quantity: 1,
+              image: "path/to/mango.jpg",
+            },
+            {
+              name: "Orange",
+              price: "Ksh 15",
+              quantity: 1,
+              image: "path/to/orange.jpg",
+            },
           ],
         },
       ],
     };
   },
   methods: {
-    increaseQuantity(categoryName, itemIndex) {
-      const category = this.menuCategories.find(
-        (cat) => cat.name === categoryName
+    addToTray(item) {
+      let selectedItems =
+        JSON.parse(localStorage.getItem("selectedItems")) || [];
+      const existingItemIndex = selectedItems.findIndex(
+        (selectedItem) => selectedItem.name === item.name
       );
-      if (category) {
-        category.items[itemIndex].quantity++;
+
+      if (existingItemIndex > -1) {
+        selectedItems[existingItemIndex].quantity += item.quantity;
+      } else {
+        selectedItems.push({ ...item });
       }
-    },
-    decreaseQuantity(categoryName, itemIndex) {
-      const category = this.menuCategories.find(
-        (cat) => cat.name === categoryName
-      );
-      if (category && category.items[itemIndex].quantity > 0) {
-        category.items[itemIndex].quantity--;
-      }
+
+      localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
     },
   },
 };
 </script>
+
+<style scoped>
+/* Add any additional styles here */
+</style>

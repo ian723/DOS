@@ -37,8 +37,9 @@
 
       <!-- Account and Tray (on the right) -->
       <div class="flex items-center space-x-4">
-        <a href="#" class="hover:underline">Account</a>
-        <a href="#" class="hover:underline">Tray</a>
+        <!-- Use router-link instead of href for navigation -->
+        <router-link to="/account" class="hover:underline">Account</router-link>
+        <router-link to="tray" class="hover:underline">Tray</router-link>
       </div>
     </header>
   </div>
