@@ -8,8 +8,10 @@
       <div
         class="flex flex-col md:flex-row items-center justify-center md:justify-between w-full md:w-auto md:space-x-4"
       >
-        <!-- Logo -->
-        <h1 class="text-2xl font-bold mb-2 md:mb-0">DOS</h1>
+        <!-- Logo with router-link -->
+        <router-link to="/" class="text-2xl font-bold mb-2 md:mb-0">
+          DOS
+        </router-link>
 
         <!-- Centered Search Bar -->
         <div class="relative flex-grow w-full md:w-auto mx-auto">
@@ -37,9 +39,8 @@
 
       <!-- Account and Tray (on the right) -->
       <div class="flex items-center space-x-4">
-        <!-- Use router-link instead of href for navigation -->
         <router-link to="/account" class="hover:underline">Account</router-link>
-        <router-link to="tray" class="hover:underline">Tray</router-link>
+        <router-link to="/tray" class="hover:underline">Tray</router-link>
       </div>
     </header>
   </div>
