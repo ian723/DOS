@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-black p-4 md:p-8">
+  <div class="bg-black p-4 md:p-8">
     <!-- Menu Section -->
     <div class="bg-gray-200 p-4 md:p-6 rounded-lg">
       <h1 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Menu</h1>
@@ -12,18 +12,18 @@
       >
         <div class="flex justify-between items-center mb-2 md:mb-4">
           <h2 class="text-lg md:text-xl">{{ category.name }}</h2>
-          <router-link
-            :to="'#' + category.name.toLowerCase()"
+          <button
+            @click="toggleViewAll(category)"
             class="text-sm text-gray-500 hover:underline"
           >
-            View all
-          </router-link>
+            {{ category.showAll ? "View less" : "View all" }}
+          </button>
         </div>
 
         <!-- Menu Items Grid -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div
-            v-for="(item, index) in category.items"
+            v-for="(item, index) in limitedItems(category)"
             :key="index"
             class="bg-white p-4 rounded-lg text-center"
           >
@@ -57,6 +57,7 @@ export default {
       menuCategories: [
         {
           name: "Drinks",
+          showAll: false,
           items: [
             {
               name: "Black Coffee",
@@ -82,10 +83,17 @@ export default {
               quantity: 1,
               image: "path/to/cappuccino.jpg",
             },
+            {
+              name: "Cappuccino",
+              price: "Ksh 100",
+              quantity: 1,
+              image: "path/to/cappuccino.jpg",
+            },
           ],
         },
         {
           name: "Snacks",
+          showAll: false,
           items: [
             {
               name: "Samosa",
@@ -115,6 +123,7 @@ export default {
         },
         {
           name: "Lunch",
+          showAll: false,
           items: [
             {
               name: "Chicken & Chips",
@@ -144,6 +153,7 @@ export default {
         },
         {
           name: "Fruits",
+          showAll: false,
           items: [
             {
               name: "Banana",
@@ -190,10 +200,12 @@ export default {
 
       localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
     },
+    toggleViewAll(category) {
+      category.showAll = !category.showAll; // Toggle the showAll property
+    },
+    limitedItems(category) {
+      return category.showAll ? category.items : category.items.slice(0, 4);
+    },
   },
 };
 </script>
-
-<style scoped>
-/* Add any additional styles here */
-</style>
