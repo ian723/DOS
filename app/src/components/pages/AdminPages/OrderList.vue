@@ -89,11 +89,12 @@
 </template>
 
 <script>
-import Sidebar from '../AdminDashboard/Sidebar.vue';
+import Sidebar from "../../AdminDashboard/Sidebar.vue";
+
 export default {
   name: "OrderList",
   components: {
-    Sidebar
-  }
+    Sidebar,
+  },
 };
 </script>
