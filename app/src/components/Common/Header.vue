@@ -39,6 +39,8 @@
 
       <!-- Account and Tray (on the right) -->
       <div class="flex items-center space-x-4">
+        <router-link to="/admin" class="hover:underline">Admin</router-link>
+        <router-link to="/tray" class="hover:underline">Customer</router-link>
         <router-link to="/account" class="hover:underline">Account</router-link>
         <router-link to="/tray" class="hover:underline">Tray</router-link>
       </div>
