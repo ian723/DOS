@@ -84,7 +84,6 @@ export default {
 </script>
 
 <style scoped>
-/* Add some styling to make the form look clean */
 form {
   max-width: 400px;
   margin: auto;

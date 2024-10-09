@@ -100,6 +100,3 @@ export default {
 };
 </script>
 
-<style scoped>
-/* Custom styles if necessary */
-</style>
