@@ -86,7 +86,7 @@
 </template>
 
 <script>
-import Sidebar from "../../AdminDashboard/Sidebar.vue";
+import Sidebar from "../../Common/Adminbar.vue";
 
 export default {
   name: "Dashboard",
