@@ -7,7 +7,11 @@ import {
   DashboardView,
   OrderView,
   AdminView,
+  PreparingView,
+  DeliveryView
 } from "../views";
+
+
 
 const routes = [
   { path: "/", name: "home", component: HomeView },
@@ -17,6 +21,8 @@ const routes = [
   { path: "/account", name: "account", component: AccountView },
   { path: "/tray", name: "tray", component: TrayView },
   { path: "/admin", name: "admin", component: AdminView },
+  { path: "/preparing", name: "prepare", component: PreparingView },
+  { path: "/delivery", name: "deliver", component: DeliveryView },
 ];
 
 /**Initialize here */

@@ -1,16 +1,10 @@
 <template>
   <div class="flex">
-    <Sidebar />
+    <Adminbar />
     <!-- Orders Section -->
     <div class="w-1/2 bg-black text-white p-4">
       <h2 class="text-2xl mb-4">Hi, savannah</h2>
-      <div class="flex space-x-4 mb-6">
-        <button class="text-yellow-500 border-b-2 border-yellow-500">
-          Orders
-        </button>
-        <button class="text-white">Preparing</button>
-        <button class="text-white">Deliveries</button>
-      </div>
+      <Orderbar />
 
       <!-- Order List -->
       <div class="space-y-4">
@@ -89,12 +83,16 @@
 </template>
 
 <script>
-import Sidebar from "../../Common/Adminbar.vue";
+import Adminbar from "../../Common/Adminbar.vue";
+import Orderbar from "../../Common/Orderbar.vue";
 
 export default {
   name: "OrderList",
   components: {
-    Sidebar,
+    Adminbar,
+    Orderbar,
   },
 };
 </script>
+
+<style scoped></style>
