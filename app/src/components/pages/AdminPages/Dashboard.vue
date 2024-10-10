@@ -18,13 +18,8 @@
       </div>
 
       <!-- Chart Area -->
-      <div class="bg-gray-100 p-4 rounded-lg mb-6">
-        <!-- Placeholder for Chart -->
-        <div
-          class="h-64 bg-gray-300 flex items-center justify-center rounded-lg"
-        >
-          <p>Chart Placeholder</p>
-        </div>
+      <div class="bg-gray-100 p-4 rounded-lg mb-6" style="height: 300px">
+        <MyChart :chart-data="chartData" />
       </div>
 
       <!-- Recent Orders Section -->
@@ -87,15 +82,28 @@
 
 <script>
 import Sidebar from "../../Common/Adminbar.vue";
+import MyChart from "../../Common/MyChart.vue";
 
 export default {
   name: "Dashboard",
   components: {
     Sidebar,
+    MyChart,
+  },
+  data() {
+    return {
+      // Sample data for the chart
+      chartData: {
+        labels: ["January", "February", "March", "April", "May", "June"],
+        datasets: [
+          {
+            label: "Sales",
+            backgroundColor: "#42A5F5",
+            data: [40, 20, 30, 50, 60, 70],
+          },
+        ],
+      },
+    };
   },
 };
 </script>
-
-<style scoped>
-/* Additional styles can be added here if necessary */
-</style>
