@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-1/5 bg-gray-200 p-4 flex flex-col space-y-4">
+  <aside class="w-full md:w-1/5 bg-gray-200 p-4 flex flex-col space-y-4">
     <router-link
       to="/dashboard"
       class="py-2 px-4 rounded hover:bg-yellow-500"

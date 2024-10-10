@@ -1,11 +1,12 @@
 <template>
-  <div class="flex">
+  <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
     <Adminbar />
+
     <!-- Main Content -->
-    <div class="flex-1 flex">
+    <div class="flex-1 flex flex-col md:flex-row">
       <!-- Orders Section -->
-      <div class="w-1/2 bg-black text-white p-4">
+      <div class="w-full md:w-1/2 bg-black text-white p-4">
         <h2 class="text-2xl mb-4">Hi, savannah</h2>
 
         <!-- Orders Navigation -->
@@ -39,14 +40,14 @@
       </div>
 
       <!-- Order Details Section -->
-      <div class="w-1/2 bg-gray-100 p-4">
+      <div class="w-full md:w-1/2 bg-gray-100 p-4 mt-6 md:mt-0">
         <div class="mb-6">
           <h3 class="text-2xl">Order #1</h3>
           <p class="text-gray-600">User #1 since 2020</p>
         </div>
 
         <!-- Address and Payment Details -->
-        <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div class="col-span-2 border-b pb-2">Address</div>
           <div>Distance</div>
           <div>Estimated Time</div>
@@ -96,14 +97,14 @@
 </template>
 
 <script>
-import Adminbar from '../../Common/Adminbar.vue';
-import Orderbar from '../../Common/Orderbar.vue';
+import Adminbar from "../../Common/Adminbar.vue";
+import Orderbar from "../../Common/Orderbar.vue";
 
 export default {
   name: "Delivery",
   components: {
     Adminbar,
     Orderbar,
-  }
+  },
 };
 </script>

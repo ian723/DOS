@@ -8,9 +8,11 @@ import {
   OrderView,
   AdminView,
   PreparingView,
-  DeliveryView
+  DeliveryView,
+  PaymentView,
+  AnalysisView,
+  RatesView,
 } from "../views";
-
 
 
 const routes = [
@@ -23,6 +25,9 @@ const routes = [
   { path: "/admin", name: "admin", component: AdminView },
   { path: "/preparing", name: "prepare", component: PreparingView },
   { path: "/delivery", name: "deliver", component: DeliveryView },
+  { path: "/payment", name: "payment", component: PaymentView },
+  { path: "/analysis", name: "analysis", component: AnalysisView },
+  { path: "/rates", name: "r&r", component: RatesView },
 ];
 
 /**Initialize here */
