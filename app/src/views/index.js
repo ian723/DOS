@@ -10,6 +10,7 @@ import DeliveryView from "../views/Admin/DeliveryView.vue";
 import PaymentView from "../views/Admin/PaymentView.vue";
 import AnalysisView from "../views/Admin/AnalysisView.vue";
 import  RatesView from "./Admin/RatesView.vue";
+import  BillsView from "./Customer/BillsView.vue";
 
 
 export {
@@ -25,4 +26,5 @@ export {
   PaymentView,
   AnalysisView,
   RatesView,
+  BillsView,
 };
