@@ -4,6 +4,8 @@
   "vetur.validation.style": false,
   "cSpell.words": [
     "Adminbar",
-    "Orderbar"
+    "Orderbar",
+    "vuelidate",
+    "vueuse"
   ]
 }
