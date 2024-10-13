@@ -11,6 +11,7 @@ import PaymentView from "../views/Admin/PaymentView.vue";
 import AnalysisView from "../views/Admin/AnalysisView.vue";
 import  RatesView from "./Admin/RatesView.vue";
 import  BillsView from "./Customer/BillsView.vue";
+import LoginView from "./Auth/LoginView.vue";
 
 
 export {
@@ -27,4 +28,5 @@ export {
   AnalysisView,
   RatesView,
   BillsView,
+  LoginView,
 };
