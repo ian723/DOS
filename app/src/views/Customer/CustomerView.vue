@@ -1,10 +1,12 @@
 <template>
     <div>
-
+        <CustomerDashboardView/>
     </div>
 </template>
 
 <script setup>
+
+import CustomerDashboardView from './CustomerDashboardView.vue';
 
 </script>
 

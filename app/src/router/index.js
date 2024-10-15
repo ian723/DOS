@@ -12,7 +12,7 @@ import {
   PaymentView,
   AnalysisView,
   RatesView,
-  BillsView,
+  CustomerDashboardView,
   LoginView, 
 } from "../views";
 
@@ -31,7 +31,7 @@ const routes = [
   { path: "/payment", name: "payment", component: PaymentView },
   { path: "/analysis", name: "analysis", component: AnalysisView },
   { path: "/rates", name: "r&r", component: RatesView },
-  { path: "/bills", name: "bills", component: BillsView },
+  { path: "/dash", name: "dash", component: CustomerDashboardView },
   { path: "/login", name: "login", component: LoginView },
 ];
 
