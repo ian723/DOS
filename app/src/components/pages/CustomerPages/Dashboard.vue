@@ -1,169 +1,167 @@
 <template>
-  <div class="min-h-screen flex flex-col md:flex-row">
-    <!-- Sidebar -->
-    <Customerbar />
+  <div class="flex flex-col lg:flex-row min-h-screen ">
+    <Customerbar/>
+    
+    <!-- Sidebar: On small screens, it will take full width and stack -->
+    <div class="w-full lg:w-1/3 bg-black text-white p-6">
+      <h1 class="text-2xl sm:text-3xl mb-4">Hi, Savannah</h1>
+      <div class="flex items-center mb-6">
+        <input
+          type="text"
+          placeholder="Search"
+          class="flex-grow px-4 py-2 rounded-l bg-gray-800 text-white"
+        />
+        <button class="bg-yellow-500 p-3 rounded-r">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </button>
+      </div>
 
-    <!-- Main Content -->
-    <div class="flex-grow p-4 bg-white">
-      <!-- Top Section: Greeting and Search -->
-      <div class="flex flex-col md:flex-row justify-between items-center mb-6">
-        <h2 class="text-2xl">Hi, Savannah</h2>
-        <div class="mt-2 md:mt-0">
-          <input
-            type="text"
-            placeholder="Search..."
-            class="border rounded p-2 focus:outline-none focus:ring focus:border-blue-300"
-          />
+      <!-- Category -->
+      <h2 class="text-xl sm:text-2xl mb-4">Category</h2>
+      <!-- Popular Dishes -->
+      <h2 class="text-xl sm:text-2xl mb-4">Popular Dishes</h2>
+
+      <!-- Recent Orders -->
+      <h2 class="text-xl sm:text-2xl mb-4">Recent Orders</h2>
+      <div class="bg-gray-500 p-4 mb-2 rounded"></div>
+      <div class="bg-gray-500 p-4 rounded"></div>
+    </div>
+
+    <!-- Tray Section -->
+    <div class="w-full lg:w-2/3 bg-gray-200 p-6">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl sm:text-2xl">Tray</h2>
+        <div class="flex items-center space-x-4">
+          <!-- Settings Button -->
+          <button class="text-xl">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253V3m0 18v-3.253m4.243-3.421l2.657 2.656m-12.2-12.2l2.656-2.656m9.9 9.9l-2.657-2.656M6.343 6.343l-2.657 2.656"
+              />
+            </svg>
+          </button>
+
+          <!-- Profile Button -->
+          <button class="text-xl">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5.121 17.804A12.073 12.073 0 0112 15c2.81 0 5.391.98 6.879 2.804m-6.879-6.804a3 3 0 100-6 3 3 0 000 6z"
+              />
+            </svg>
+          </button>
         </div>
       </div>
 
-      <!-- My Order Section -->
-      <section class="mt-8">
-        <h3 class="text-3xl font-bold mb-4">My Order</h3>
-        <div class="bg-gray-100 p-4 rounded-lg shadow">
-          <OrderItem
-            name="Pilau + Beef"
-            :price="250"
-            imageSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Flag_map_of_Kenya.svg/1200px-Flag_map_of_Kenya.svg.png"
+      <!-- Items -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row items-center bg-white p-4 rounded shadow">
+          <img
+            src="https://via.placeholder.com/50"
+            alt="Item"
+            class="w-12 h-12 rounded-full"
           />
-          <OrderItem
-            name="Soda"
-            :price="50"
-            imageSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Flag_map_of_Kenya.svg/1200px-Flag_map_of_Kenya.svg.png"
-          />
-          <div class="text-3xl font-bold mt-4">Total: Ksh 300</div>
-
-          <button
-            @click="openModal"
-            class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-6 rounded"
-          >
-            Checkout
-          </button>
-        </div>
-      </section>
-
-      <!-- Address Section -->
-      <section class="mt-8">
-        <h3 class="text-2xl font-bold mb-4">Address</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <p>Distance: {{ distance }}</p>
-            <p>Estimated Time: {{ duration }}</p>
-            <p>Order Status: <span class="text-blue-500">Preparing</span></p>
-            <p>Payment Status: <span class="text-green-500">Completed</span></p>
+          <div class="flex-grow ml-4">
+            <h3 class="text-lg">Tea</h3>
+            <p class="text-sm">1 Cup</p>
           </div>
           <div>
-            <OrderMap :location="orderLocation" />
+            <p>Kshs 30</p>
           </div>
         </div>
-      </section>
 
-      <!-- Modal for Payment Method -->
-      <transition name="fade">
-        <div
-          v-if="isModalOpen"
-          class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-        >
-          <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <h3 class="text-xl font-bold mb-4">Select Payment Method</h3>
-            <div class="grid grid-cols-1 gap-4">
-              <button
-                @click="handlePayment('cash')"
-                class="bg-black text-white font-bold py-3 rounded shadow hover:bg-gray-800"
-              >
-                Cash
-              </button>
-              <button
-                @click="handlePayment('cashless')"
-                class="bg-black text-white font-bold py-3 rounded shadow hover:bg-gray-800"
-              >
-                Cashless
-              </button>
-            </div>
-            <button
-              @click="closeModal"
-              class="mt-4 text-red-500 hover:underline"
-            >
-              Cancel
-            </button>
+        <div class="flex flex-col sm:flex-row items-center bg-white p-4 rounded shadow">
+          <img
+            src="https://via.placeholder.com/50"
+            alt="Item"
+            class="w-12 h-12 rounded-full"
+          />
+          <div class="flex-grow ml-4">
+            <h3 class="text-lg">Tea</h3>
+            <p class="text-sm">1 Cup</p>
+          </div>
+          <div>
+            <p>Kshs 30</p>
           </div>
         </div>
-      </transition>
+
+        <div class="flex flex-col sm:flex-row items-center bg-white p-4 rounded shadow">
+          <img
+            src="https://via.placeholder.com/50"
+            alt="Item"
+            class="w-12 h-12 rounded-full"
+          />
+          <div class="flex-grow ml-4">
+            <h3 class="text-lg">Tea</h3>
+            <p class="text-sm">1 Cup</p>
+          </div>
+          <div>
+            <p>Kshs 30</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total and Checkout -->
+      <div class="mt-6">
+        <div class="flex justify-between mb-2">
+          <p>Service</p>
+          <p>Kshs 3</p>
+        </div>
+        <div class="flex justify-between mb-4 font-bold">
+          <p>Total</p>
+          <p>Kshs 90</p>
+        </div>
+        <button class="w-full bg-yellow-500 py-3 rounded text-white text-lg">
+          Checkout
+        </button>
+      </div>
+
+      <!-- Address -->
+      <div class="mt-8 p-4 bg-orange-300 rounded">
+        <p>Kabira Road, Biashara House</p>
+        <p>2nd Floor, Rm 92</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Customerbar from "../../Common/Customerbar.vue";
-import OrderMap from "../../Common/OrderMap.vue";
-import OrderItem from "./OrderItem.vue";
-import axios from "axios";
+import Customerbar from '../../Common/Customerbar.vue';
 
 export default {
-  name: "CustomerDashboard",
+  name: "Dash",
   components: {
-    Customerbar,
-    OrderMap,
-    OrderItem,
-  },
-  data() {
-    return {
-      isModalOpen: false,
-      orderLocation: { lat: -1.286389, lng: 36.817223 },
-      distance: "Calculating...",
-      duration: "Calculating...",
-    };
-  },
-  mounted() {
-    this.fetchDistanceAndDuration();
-  },
-  methods: {
-    async fetchDistanceAndDuration() {
-      const origin = "Restaurant Address";
-      const destination = "Customer Address";
-
-      const apiKey = "AIzaSyAAl0C0X6jAYaloVC5O1leSirnL-KtLLv8";
-      const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${origin}&destinations=${destination}&key=${apiKey}`;
-
-      try {
-        const response = await axios.get(url);
-        if (response.data.rows && response.data.rows.length > 0) {
-          const elements = response.data.rows[0].elements;
-          if (elements[0].status === "OK") {
-            this.distance = elements[0].distance.text;
-            this.duration = elements[0].duration.text;
-          } else {
-            this.distance = "N/A";
-            this.duration = "N/A";
-          }
-        }
-      } catch (error) {
-        console.error("Error fetching distance and duration:", error);
-        this.distance = "Error";
-        this.duration = "Error";
-      }
-    },
-    openModal() {
-      this.isModalOpen = true;
-    },
-    closeModal() {
-      this.isModalOpen = false;
-    },
-    handlePayment(method) {
-      alert(`You selected ${method} payment.`);
-      this.closeModal();
-    },
-  },
+    Customerbar
+  }
 };
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

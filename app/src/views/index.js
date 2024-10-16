@@ -12,7 +12,7 @@ import AnalysisView from "../views/Admin/AnalysisView.vue";
 import  RatesView from "./Admin/RatesView.vue";
 import  DashView from "./Customer/DashView.vue";
 import LoginView from "./Auth/LoginView.vue";
-
+import FoodOrderView from "./Customer/FoodOrderView.vue";
 
 export {
   HomeView,
@@ -29,4 +29,5 @@ export {
   RatesView,
   DashView,
   LoginView,
+  FoodOrderView,
 };

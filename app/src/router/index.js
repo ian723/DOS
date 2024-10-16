@@ -14,7 +14,9 @@ import {
   RatesView,
   DashView,
   LoginView, 
+  FoodOrderView, 
 } from "../views";
+
 
 
 
@@ -33,6 +35,7 @@ const routes = [
   { path: "/rates", name: "r&r", component: RatesView },
   { path: "/dash", name: "dash", component: DashView },
   { path: "/login", name: "login", component: LoginView },
+  { path: "/order", name: "food", component: FoodOrderView },
 ];
 
 /**Initialize here */
