@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  name: "MenuComponent",
+  name: "Menu",
   data() {
     return {
       menuCategories: [
