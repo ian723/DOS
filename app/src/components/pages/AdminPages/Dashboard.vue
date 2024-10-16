@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col md:flex-row">
     <!-- Sidebar -->
-    <Sidebar />
+    <Adminbar />
 
     <!-- Main Content -->
     <div class="flex-grow p-4 bg-white">
@@ -81,13 +81,13 @@
 </template>
 
 <script>
-import Sidebar from "../../Common/Adminbar.vue";
+import Adminbar from "../../Common/Adminbar.vue";
 import MyChart from "../../Common/MyChart.vue";
 
 export default {
   name: "Dashboard",
   components: {
-    Sidebar,
+    Adminbar,
     MyChart,
   },
   data() {
