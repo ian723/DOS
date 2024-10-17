@@ -8,8 +8,15 @@ import {
   OrderView,
   AdminView,
   PreparingView,
-  DeliveryView
+  DeliveryView,
+  PaymentView,
+  AnalysisView,
+  RatesView,
+  DashView,
+  LoginView, 
+  FoodOrderView, 
 } from "../views";
+
 
 
 
@@ -23,6 +30,12 @@ const routes = [
   { path: "/admin", name: "admin", component: AdminView },
   { path: "/preparing", name: "prepare", component: PreparingView },
   { path: "/delivery", name: "deliver", component: DeliveryView },
+  { path: "/payment", name: "payment", component: PaymentView },
+  { path: "/analysis", name: "analysis", component: AnalysisView },
+  { path: "/rates", name: "r&r", component: RatesView },
+  { path: "/dash", name: "dash", component: DashView },
+  { path: "/login", name: "login", component: LoginView },
+  { path: "/order", name: "food", component: FoodOrderView },
 ];
 
 /**Initialize here */

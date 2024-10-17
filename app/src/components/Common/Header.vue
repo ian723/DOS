@@ -50,6 +50,6 @@
 
 <script>
 export default {
-  name: "MainComponent",
+  name: "Header",
 };
 </script>

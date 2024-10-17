@@ -4,6 +4,12 @@
   "vetur.validation.style": false,
   "cSpell.words": [
     "Adminbar",
-    "Orderbar"
+    "Biashara",
+    "Customerbar",
+    "Kabira",
+    "Kshs",
+    "Orderbar",
+    "vuelidate",
+    "vueuse"
   ]
 }

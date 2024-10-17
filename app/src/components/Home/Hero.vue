@@ -96,7 +96,7 @@
 
 <script>
 export default {
-  name: "MenuComponent",
+  name: "Hero",
 };
 </script>
 

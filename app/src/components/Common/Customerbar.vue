@@ -1,7 +1,7 @@
 <template>
   <aside class="w-full md:w-1/5 bg-gray-200 p-4 flex flex-col space-y-4">
     <router-link
-      to="/dashboard"
+      to="dash"
       class="py-2 px-4 rounded hover:bg-yellow-500"
       active-class="bg-yellow-500 text-white"
       exact
@@ -9,38 +9,38 @@
       Dashboard
     </router-link>
     <router-link
-      to="/orders"
+      to="order"
       class="py-2 px-4 rounded hover:bg-yellow-500"
       active-class="bg-yellow-500 text-white"
     >
-      Order List
+      Food Order
     </router-link>
     <router-link
-      to="/payment"
+      to="#"
       class="py-2 px-4 rounded hover:bg-yellow-500"
       active-class="bg-yellow-500 text-white"
     >
-      Payment
+      Order history
     </router-link>
     <router-link
-      to="/analysis"
+      to="#"
       class="py-2 px-4 rounded hover:bg-yellow-500"
       active-class="bg-yellow-500 text-white"
     >
-      Analysis
+      Bills
     </router-link>
     <router-link
-      to="/rates"
+      to="#"
       class="py-2 px-4 rounded hover:bg-yellow-500"
       active-class="bg-yellow-500 text-white"
     >
-      Rates & Rvs
+      Reviews
     </router-link>
   </aside>
 </template>
 
 <script>
 export default {
-  name: "Adminbar",
+  name: "Customerbar",
 };
 </script>
