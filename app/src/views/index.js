@@ -13,6 +13,7 @@ import  RatesView from "./Admin/RatesView.vue";
 import  DashView from "./Customer/DashView.vue";
 import LoginView from "./Auth/LoginView.vue";
 import FoodOrderView from "./Customer/FoodOrderView.vue";
+import HistoryView from "./Customer/HistoryView.vue";
 
 export {
   HomeView,
@@ -30,4 +31,5 @@ export {
   DashView,
   LoginView,
   FoodOrderView,
+  HistoryView
 };

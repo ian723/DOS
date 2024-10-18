@@ -16,7 +16,7 @@
       Food Order
     </router-link>
     <router-link
-      to="#"
+      to="history"
       class="py-2 px-4 rounded hover:bg-yellow-500"
       active-class="bg-yellow-500 text-white"
     >
