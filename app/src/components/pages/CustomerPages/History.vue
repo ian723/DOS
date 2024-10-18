@@ -1,6 +1,8 @@
 <template>
   <div class="min-h-screen flex flex-col lg:flex-row bg-gray-50">
-    <Customerbar />
+
+    <Customerbar/>
+
     <!-- Left Side: Orders List -->
     <div class="w-full lg:w-2/3 p-4 lg:p-6 bg-black text-white">
       <div class="flex flex-col lg:flex-row justify-between items-center mb-4">
@@ -20,7 +22,11 @@
 
       <!-- Orders List -->
       <div class="space-y-4">
-        <OrderCard v-for="(order, index) in orders" :key="index" />
+        <OrderCard
+          v-for="(order, index) in orders"
+          :key="index"
+          :order="order"
+        />
       </div>
     </div>
 
@@ -35,7 +41,11 @@
 
       <!-- Tray Items -->
       <div class="space-y-2 mt-4">
-        <TrayItem v-for="(item, index) in trayItems" :key="index" />
+        <TrayItem
+          v-for="(item, index) in trayItems"
+          :key="index"
+          :item="item"
+        />
       </div>
 
       <!-- Checkout Section -->
@@ -77,13 +87,33 @@ export default {
   },
   data() {
     return {
-      orders: [1, 2, 3, 4], // Dummy data for orders
-      trayItems: [1, 2, 3], // Dummy data for tray items
+      // Separate data for orders and tray items
+      orders: [
+        { id: 1, number: "Order#1", date: "Oct 2024", total: 300 },
+        { id: 2, number: "Order#2", date: "Oct 2024", total: 250 },
+        { id: 3, number: "Order#3", date: "Oct 2024", total: 400 },
+        { id: 4, number: "Order#4", date: "Oct 2024", total: 150 },
+      ],
+      trayItems: [
+        { id: 1, name: "Tea", quantity: "1 Cup", price: 30, image: "tea.png" },
+        {
+          id: 2,
+          name: "Coffee",
+          quantity: "1 Cup",
+          price: 40,
+          image: "coffee.png",
+        },
+        {
+          id: 3,
+          name: "Juice",
+          quantity: "1 Glass",
+          price: 50,
+          image: "juice.png",
+        },
+      ],
     };
   },
 };
 </script>
 
-<style scoped>
-/* Custom styles if necessary */
-</style>
+<style scoped></style>
