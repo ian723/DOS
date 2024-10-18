@@ -16,8 +16,10 @@ import {
   LoginView, 
   FoodOrderView, 
   HistoryView,
-  ReviewsView
+  ReviewsView,
+  RegisterView
 } from "../views";
+
 
 
 
@@ -38,6 +40,7 @@ const routes = [
   { path: "/rates", name: "r&r", component: RatesView },
   { path: "/dash", name: "dash", component: DashView },
   { path: "/login", name: "login", component: LoginView },
+  { path: "/register", name: "register", component: RegisterView },
   { path: "/order", name: "food", component: FoodOrderView },
   { path: "/history", name: "history", component: HistoryView },
   { path: "/review", name: "rates", component: ReviewsView },

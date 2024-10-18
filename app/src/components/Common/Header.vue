@@ -44,8 +44,22 @@
         <router-link to="/customer" class="hover:underline"
           >Customer</router-link
         >
-        <router-link to="/account" class="hover:underline">Account</router-link>
+
+        <!-- Conditionally show Account link if loggedIn is true -->
+        <router-link v-if="loggedIn" to="/account" class="hover:underline"
+          >Account</router-link
+        >
         <router-link to="/tray" class="hover:underline">Tray</router-link>
+
+        <!-- Show Logout option if logged in -->
+        <button v-if="loggedIn" @click="logout" class="hover:underline">
+          Logout
+        </button>
+
+        <!-- Show Login option if not logged in -->
+        <router-link v-else to="/login" class="hover:underline"
+          >Login</router-link
+        >
       </div>
     </header>
   </div>
@@ -54,5 +68,20 @@
 <script>
 export default {
   name: "Header",
+  computed: {
+    loggedIn() {
+      // Check if the user is logged in
+      return !!localStorage.getItem("authToken"); // Example check
+    },
+  },
+  methods: {
+    logout() {
+      // Clear the token from localStorage
+      localStorage.removeItem("authToken");
+
+      // Redirect to home or login page
+      this.$router.push("/login");
+    },
+  },
 };
 </script>

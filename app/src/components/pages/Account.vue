@@ -59,24 +59,33 @@ export default {
   data() {
     return {
       account: {
-        name: "John Doe", // Example user data, should be fetched from a backend
-        email: "john@example.com",
-        password: "********",
+        name: "",
+        email: "",
+        password: "",
       },
     };
   },
+  created() {
+    this.fetchAccountInfo(); // Fetch account info when component is created
+  },
   methods: {
-    saveChanges() {
-      // Handle saving changes (e.g., send updated info to backend)
-      alert("Changes saved!");
-    },
-    cancelEdit() {
-      // Handle cancelling edit (e.g., reload original data)
-      this.account = {
-        name: "John Doe",
+    fetchAccountInfo() {
+      // Fetch user info from the backend (use actual API call)
+      const userData = {
+        name: "John Doe", // Example data; replace with real data from backend
         email: "john@example.com",
         password: "********",
       };
+      this.account = userData;
+    },
+    saveChanges() {
+      // Send the updated account information to the backend
+      // Example: axios.post('/api/account', this.account)
+      alert("Changes saved!");
+    },
+    cancelEdit() {
+      // Reload the original account information
+      this.fetchAccountInfo();
       alert("Changes cancelled!");
     },
   },
