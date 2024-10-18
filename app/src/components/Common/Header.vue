@@ -60,6 +60,9 @@
         <router-link v-else to="/login" class="hover:underline"
           >Login</router-link
         >
+        <router-link to="/register" class="hover:underline"
+          >Sign in</router-link
+        >
       </div>
     </header>
   </div>
