@@ -71,8 +71,7 @@
 </template>
 
 <script>
-import axios from "axios"; // Assuming you're using axios for HTTP requests
-
+import axios from "axios"; 
 export default {
   name: "RegisterPage",
   data() {
