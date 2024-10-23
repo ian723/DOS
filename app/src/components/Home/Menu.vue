@@ -1,5 +1,13 @@
 <template>
   <div class="bg-black p-4 md:p-8">
+    <!-- Notification for added items -->
+    <div
+      v-if="notificationMessage"
+      class="bg-green-500 text-white p-2 rounded mb-4"
+    >
+      {{ notificationMessage }}
+    </div>
+
     <!-- Menu Section -->
     <div class="bg-gray-200 p-4 md:p-6 rounded-lg">
       <h1 class="text-xl md:text-2xl font-bold mb-4 md:mb-6">Menu</h1>
@@ -38,9 +46,10 @@
             <p class="text-sm text-gray-500">{{ item.price }}</p>
             <button
               @click="addToTray(item)"
-              class="mt-2 bg-blue-500 text-white px-2 py-1 rounded"
+              class="mt-2 text-white px-2 py-1 rounded"
+              :class="item.addedToTray ? 'bg-green-500' : 'bg-blue-500'"
             >
-              Add to Tray
+              {{ item.addedToTray ? "Added" : "Add to Tray" }}
             </button>
           </div>
         </div>
@@ -64,30 +73,28 @@ export default {
               price: "Ksh 40",
               quantity: 1,
               image: "path/to/coffee.jpg",
+              addedToTray: false,
             },
             {
               name: "Espresso",
               price: "Ksh 60",
               quantity: 1,
               image: "path/to/espresso.jpg",
+              addedToTray: false,
             },
             {
               name: "Latte",
               price: "Ksh 80",
               quantity: 1,
               image: "path/to/latte.jpg",
+              addedToTray: false,
             },
             {
               name: "Cappuccino",
               price: "Ksh 100",
               quantity: 1,
               image: "path/to/cappuccino.jpg",
-            },
-            {
-              name: "Cappuccino",
-              price: "Ksh 100",
-              quantity: 1,
-              image: "path/to/cappuccino.jpg",
+              addedToTray: false,
             },
           ],
         },
@@ -100,92 +107,38 @@ export default {
               price: "Ksh 30",
               quantity: 1,
               image: "path/to/samosa.jpg",
+              addedToTray: false,
             },
             {
               name: "Sandwich",
               price: "Ksh 50",
               quantity: 1,
               image: "path/to/sandwich.jpg",
+              addedToTray: false,
             },
             {
               name: "Pancake",
               price: "Ksh 20",
               quantity: 1,
               image: "path/to/pancake.jpg",
+              addedToTray: false,
             },
             {
               name: "Croissant",
               price: "Ksh 40",
               quantity: 1,
               image: "path/to/croissant.jpg",
-            },
-          ],
-        },
-        {
-          name: "Lunch",
-          showAll: false,
-          items: [
-            {
-              name: "Chicken & Chips",
-              price: "Ksh 150",
-              quantity: 1,
-              image: "path/to/chicken-chips.jpg",
-            },
-            {
-              name: "Pilau",
-              price: "Ksh 120",
-              quantity: 1,
-              image: "path/to/pilau.jpg",
-            },
-            {
-              name: "Beef Stew",
-              price: "Ksh 100",
-              quantity: 1,
-              image: "path/to/beef-stew.jpg",
-            },
-            {
-              name: "Ugali & Fish",
-              price: "Ksh 200",
-              quantity: 1,
-              image: "path/to/ugali-fish.jpg",
-            },
-          ],
-        },
-        {
-          name: "Fruits",
-          showAll: false,
-          items: [
-            {
-              name: "Banana",
-              price: "Ksh 10",
-              quantity: 1,
-              image: "path/to/banana.jpg",
-            },
-            {
-              name: "Apple",
-              price: "Ksh 20",
-              quantity: 1,
-              image: "path/to/apple.jpg",
-            },
-            {
-              name: "Mango",
-              price: "Ksh 30",
-              quantity: 1,
-              image: "path/to/mango.jpg",
-            },
-            {
-              name: "Orange",
-              price: "Ksh 15",
-              quantity: 1,
-              image: "path/to/orange.jpg",
+              addedToTray: false,
             },
           ],
         },
       ],
+      notificationMessage: "", 
     };
   },
   methods: {
     addToTray(item) {
+      // Add item to tray logic
       let selectedItems =
         JSON.parse(localStorage.getItem("selectedItems")) || [];
       const existingItemIndex = selectedItems.findIndex(
@@ -199,9 +152,21 @@ export default {
       }
 
       localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+
+      // Set the addedToTray flag to true
+      item.addedToTray = true;
+
+      // Show notification message
+      this.notificationMessage = `${item.name} added to tray`;
+
+      // Clear the message and revert button after 1 seconds
+      setTimeout(() => {
+        this.notificationMessage = ""; 
+        item.addedToTray = false;
+      }, 1000);
     },
     toggleViewAll(category) {
-      category.showAll = !category.showAll; // Toggle the showAll property
+      category.showAll = !category.showAll; 
     },
     limitedItems(category) {
       return category.showAll ? category.items : category.items.slice(0, 4);

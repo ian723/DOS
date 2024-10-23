@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <!-- Header Section -->
     <header
       class="bg-gray-400 p-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
@@ -49,20 +49,36 @@
         <router-link v-if="loggedIn" to="/account" class="hover:underline"
           >Account</router-link
         >
-        <router-link to="/tray" class="hover:underline">Tray</router-link>
 
         <!-- Show Logout option if logged in -->
         <button v-if="loggedIn" @click="logout" class="hover:underline">
           Logout
         </button>
 
-        <!-- Show Login option if not logged in -->
+        <!-- Show Login/Sign In option if not logged in -->
         <router-link v-else to="/login" class="hover:underline"
           >Login</router-link
         >
         <router-link to="/register" class="hover:underline"
           >Sign in</router-link
         >
+
+        <!-- Cart Icon with Dynamic Item Count -->
+        <div class="relative">
+          <router-link to="/tray">
+            <img
+              src="https://t3.ftcdn.net/jpg/01/13/95/02/360_F_113950213_2znQQrapC21FcNXfvqwjnXm5gs6jDi06.jpg"
+              alt="Cart"
+              class="w-10 h-10"
+            />
+            <span
+              v-if="totalItems > 0"
+              class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              {{ totalItems }}
+            </span>
+          </router-link>
+        </div>
       </div>
     </header>
   </div>
@@ -71,10 +87,19 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      items: JSON.parse(localStorage.getItem("selectedItems")) || [], // Cart items
+    };
+  },
   computed: {
     loggedIn() {
       // Check if the user is logged in
       return !!localStorage.getItem("authToken"); // Example check
+    },
+    totalItems() {
+      // Calculate total number of items in the cart
+      return this.items.reduce((total, item) => total + item.quantity, 0);
     },
   },
   methods: {
@@ -86,5 +111,38 @@ export default {
       this.$router.push("/login");
     },
   },
+  mounted() {
+    // Load items from local storage when the component is mounted
+    const savedItems = JSON.parse(localStorage.getItem("selectedItems"));
+    if (savedItems) {
+      this.items = savedItems;
+    }
+  },
 };
 </script>
+
+<style scoped>
+/* Add some basic styling for the cart icon */
+.cart-icon {
+  position: relative;
+}
+
+.cart-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.cart-icon .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+</style>
