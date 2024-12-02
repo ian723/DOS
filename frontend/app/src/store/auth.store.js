@@ -14,128 +14,82 @@ export const useAuthStore = defineStore("auth", () => {
   const returnUrl = ref(null);
   const error = ref(null);
   let login;
-  let register;
 
-  /** Login method for local instance */
+  /**Login method for local instance */
   async function login_local(formData) {
     const username = formData.email;
     const password = formData.password;
     console.log("This is the formData in store", { username, password });
-
-    try {
-      const fetchedUser = await fetchWrapper.post(`${baseUrl}/login`, {
+    const fetchedUser = await fetchWrapper
+      .post(`${baseUrl}/login`, {
         username,
         password,
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response);
+        error.value = err.response ? err.response.data.message : err.message;
       });
 
-      // Update pinia state
-      user.value = JSON.stringify(fetchedUser);
+    console.log(fetchedUser);
 
-      // Redirect to previous URL or default to homepage
-      router.push(returnUrl.value || "/");
-    } catch (err) {
-      console.error(err);
-      error.value = err.response ? err.response.data.message : err.message;
-    }
+    // update pinia state
+    user.value = JSON.stringify(fetchedUser);
+
+    // redirect to previous url or default to home page
+    router.push(returnUrl.value || "/");
   }
 
-  /** Login method for remote instance */
+  /**Login method for remote instance */
   async function login_remote(credentials) {
-    try {
-      const response = await post("login", credentials);
+    const response = await post("login", credentials)
+      .then((response) => {
+        console.log(response);
+        user.value = response.data.user
+          ? JSON.stringify(response.data.user)
+          : null;
 
-      console.log(response);
-      user.value = response.data.user
-        ? JSON.stringify(response.data.user)
-        : null;
-
-      // Capture the access token
-      access_token.value = response.data ? response.data.token : null;
-
-      // Redirect to previous URL or default to homepage
-      router.push(returnUrl.value || "/");
-    } catch (err) {
-      console.error(err);
-      error.value = err.response ? err.response.data.message : err.message;
-    }
-  }
-
-  /** Register method for local instance */
-  async function register_local(formData) {
-    const { email: username, password, name } = formData;
-
-    try {
-      const fetchedUser = await fetchWrapper.post(`${baseUrl}/register`, {
-        username,
-        password,
-        name,
+        //capture the access token
+        access_token.value = response.data ? response.data.token : null;
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response);
+        error.value = err.response ? err.response.data.message : err.message;
       });
 
-      console.log("Registration successful:", fetchedUser);
-      user.value = JSON.stringify(fetchedUser);
-
-      // Redirect to login page after registration
-      router.push("/login");
-    } catch (err) {
-      console.error(err);
-      error.value = err.response ? err.response.data.message : err.message;
-    }
-  }
-
-  /** Register method for remote instance */
-  async function register_remote(credentials) {
-    try {
-      const response = await post("register", credentials);
-
-      console.log("Registration successful:", response);
-      user.value = response.data.user
-        ? JSON.stringify(response.data.user)
-        : null;
-
-      // Redirect to login page after registration
-      router.push("/login");
-    } catch (err) {
-      console.error(err);
-      error.value = err.response ? err.response.data.message : err.message;
-    }
+    // redirect to previous url or default to home page
+    router.push(returnUrl.value || "/");
   }
 
   /** Test API */
   async function test() {
-    try {
-      const response = await get("shops");
-      console.log(response);
-      // Uncomment if needed to log out on forbidden access
-      // if(response.data.responseStatus === 403) logout();
-    } catch (err) {
-      console.error(err);
-    }
+    await get("shops")
+      .then((response) => {
+        console.log(response);
+        // //Logout if forbidden
+        // if(response.data.responseStatus === 403){
+        //   logout();
+        // }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  /** Logout */
+  /**Logout here */
   function logout() {
     user.value = null;
     access_token.value = null;
     router.push("/login");
   }
 
-  /** Set login and register methods based on mode */
-  if (mode === "local") {
+  /**Identify the login method */
+  if (mode == "local") {
     login = login_local;
-    register = register_local;
-  } else if (mode === "remote") {
+  } else if (mode == "remote") {
     login = login_remote;
-    register = register_remote;
   }
 
-  return {
-    user,
-    access_token,
-    returnUrl,
-    error,
-    test,
-    login,
-    register,
-    logout,
-  };
+  return { user, returnUrl, error, test, login, logout };
 });

@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="flex flex-col items-center min-h-screen bg-gray-100">
     <h2 class="text-2xl font-semibold text-center p-6">Create an Account</h2>
     <div class="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
@@ -145,4 +145,17 @@ const onSubmit = async () => {
     console.log("Registration form not submitted");
   }
 };
+</script> -->
+<template>
+  <div>
+
+  </div>
+</template>
+
+<script setup>
+
 </script>
+
+<style lang="scss" scoped>
+
+</style>
